@@ -1,6 +1,3 @@
-# vimrc
-
-```
 "{{{Auto Commands
 
 " Automatically cd into the directory that the file is in
@@ -295,4 +292,3 @@ let g:Tex_ViewRule_pdf = "kpdf"
 filetype plugin indent on
 syntax on
 set re=1
-```
