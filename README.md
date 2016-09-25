@@ -87,7 +87,7 @@ set number
 " Ignoring case is a fun trick
 set ignorecase
 
-" And so is Artificial Intellegence!
+" And so is Artificial Intelligence!
 set smartcase
 
 " This is totally awesome - remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
@@ -162,7 +162,19 @@ function! RotateColorTheme()
       endif
    endwhile
 endfunction
-" }}}
+"}}}
+
+"{{{ Paste Detection In Terminal
+let &t_SI .= "\<Esc>[?2004h"
+let &t_EI .= "\<Esc>[?2004l"
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
+"}}}
 
 "{{{ Paste Toggle
 let paste_mode = 0 " 0 = normal, 1 = paste
@@ -243,9 +255,9 @@ nnoremap <silent> j gj
 inoremap <silent> <Up> <Esc>gka
 inoremap <silent> <Down> <Esc>gja
 
-" Good call Benjie (r for i)
-nnoremap <silent> <Home> i <Esc>r
-nnoremap <silent> <End> a <Esc>r
+" This Is Shit, Disabling For Now
+" nnoremap <silent> <Home> i <Esc>r
+" nnoremap <silent> <End> a <Esc>r
 
 " Create Blank Newlines and stay in Normal mode
 nnoremap <silent> zj o<Esc>
@@ -283,6 +295,14 @@ let Tlist_Enable_Fold_Column = 0
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_Use_SingleClick = 1
 let Tlist_Inc_Winwidth = 0
+"}}}
+
+"{{{ Modules
+
+" YAML
+  au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/yaml.vim
+"
+
 "}}}
 
 let g:rct_completion_use_fri = 1
