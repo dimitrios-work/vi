@@ -1,3 +1,10 @@
+"{{{ pathogen first
+"pathogen
+execute pathogen#infect()
+"
+"}}}
+
+
 "{{{Auto Commands
 
 " Automatically cd into the directory that the file is in
@@ -162,9 +169,9 @@ function! RotateColorTheme()
       endif
    endwhile
 endfunction
-"}}}
+" }}}
 
-"{{{ Paste Detection In Terminal
+"{{{ Mouse Paste From Terminal Auto-Detect
 let &t_SI .= "\<Esc>[?2004h"
 let &t_EI .= "\<Esc>[?2004l"
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
@@ -250,12 +257,14 @@ nnoremap <silent> <Leader>ev :tabnew<CR>:e ~/.vimrc<CR>
 nnoremap <silent> <Leader>gv :tabnew<CR>:e ~/.gvimrc<CR>
 
 " Up and down are more logical with g..
+"nnoremap <silent> k j
+"nnoremap <silent> j k
 nnoremap <silent> k gk
 nnoremap <silent> j gj
 inoremap <silent> <Up> <Esc>gka
 inoremap <silent> <Down> <Esc>gja
 
-" This Is Shit, Disabling For Now
+" Good call Benjie (r for i)
 " nnoremap <silent> <Home> i <Esc>r
 " nnoremap <silent> <End> a <Esc>r
 
@@ -272,11 +281,11 @@ map N Nzz
 map n nzz
 
 " Testing
-set completeopt=longest,menuone,preview
+"set completeopt=longest,menuone,preview
 
-inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
-inoremap <expr> <c-n> pumvisible() ? "\<lt>c-n>" : "\<lt>c-n>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>"
-inoremap <expr> <m-;> pumvisible() ? "\<lt>c-n>" : "\<lt>c-x>\<lt>c-o>\<lt>c-n>\<lt>c-p>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>"
+"inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
+"inoremap <expr> <c-n> pumvisible() ? "\<lt>c-n>" : "\<lt>c-n>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>"
+"inoremap <expr> <m-;> pumvisible() ? "\<lt>c-n>" : "\<lt>c-x>\<lt>c-o>\<lt>c-n>\<lt>c-p>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>"
 
 " Swap ; and :  Convenient.
 nnoremap ; :
@@ -303,6 +312,25 @@ let Tlist_Inc_Winwidth = 0
   au BufNewFile,BufRead *.yaml,*.yml so ~/.vim/yaml.vim
 "
 
+"}}}
+
+"{{{ Plugins
+" Syntastic
+  let g:syntastic_aggregate_errors = 1
+  let g:syntastic_python_checkers = ['python', 'pylint', 'pyflakes']
+"
+"NERDtree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"
+"neocomplete
+let g:neocomplete#enable_at_startup = 1
+"
+"neocomplete cache
+let g:neocomplcache_enable_at_startup = 1
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"
 "}}}
 
 let g:rct_completion_use_fri = 1
