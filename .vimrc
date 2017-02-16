@@ -316,8 +316,15 @@ let Tlist_Inc_Winwidth = 0
 
 "{{{ Plugins
 " Syntastic
-  let g:syntastic_aggregate_errors = 1
-  let g:syntastic_python_checkers = ['python', 'pylint', 'pyflakes']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_python_checkers = ['python', 'pylint', 'pyflakes']
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 "
 "NERDtree
 autocmd StdinReadPre * let s:std_in=1
@@ -325,6 +332,9 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "
 "neocomplete
 let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 "
 "neocomplete cache
 let g:neocomplcache_enable_at_startup = 1
@@ -332,6 +342,11 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 "
 "}}}
+
+"{{{ additional options per filetype
+" Ansible
+autocmd FileType ansible set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:.
+autocmd FileType ansible set list
 
 let g:rct_completion_use_fri = 1
 "let g:Tex_DefaultTargetFormat = "pdf"
