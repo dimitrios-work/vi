@@ -11,7 +11,7 @@ execute pathogen#infect()
 autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 
 " Remove any trailing whitespace that is in the file
-autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+autocmd BufRead,BufWrite * if ! &bin && &filetype != 'markdown' | silent! %s/\s\+$//ge | endif
 
 " Restore cursor position to where it was before
 augroup JumpCursorOnEdit
@@ -331,8 +331,11 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "
 "neocomplete
+let g:acp_enableAtStartup = 0
+"let g:neocomplete#disable_auto_complete = 1
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#enable_auto_select = 0
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 inoremap <expr><Tab>  pumvisible() ? "\<C-n>" : neocomplete#start_manual_complete()
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
@@ -360,4 +363,4 @@ let g:Tex_ViewRule_pdf = "kpdf"
 
 filetype plugin indent on
 syntax on
-set re=1
+"set re=1
