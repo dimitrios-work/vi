@@ -4,7 +4,6 @@
   vars:
     vim_related_packages: ['vim',
                            'vim-addon-manager',
-                           'vim-addon-mw-utils',
                            'vim-common',
                            'vim-gocomplete',
                            'vim-syntax-docker']
@@ -18,6 +17,12 @@
                        'https://github.com/vim-syntastic/syntastic.git']
 
   pre_tasks:
+
+  - name: downloading vimrc
+    get_url:
+      url: https://raw.githubusercontent.com/dimitrios-work/vi/master/.vimrc
+      dest: "~/.vimrc"
+      mode: 0644
 
   - name: creating the necessary vim directory structure for the user
     file:
