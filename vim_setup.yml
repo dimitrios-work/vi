@@ -1,12 +1,12 @@
 ---
 - hosts: localhost
+  connection: local
   vars:
     vim_related_packages: ['vim',
                            'vim-addon-manager',
                            'vim-addon-mw-utils',
                            'vim-common',
                            'vim-gocomplete',
-                           'vim-puppet',
                            'vim-syntax-docker']
     vim_plugin_repos: ['https://github.com/pearofducks/ansible-vim.git',
                        'https://github.com/davidhalter/jedi-vim.git',
@@ -31,7 +31,7 @@
 
   - name: downloading pathogen
     get_url:
-      url: https://github.com/tpope/vim-pathogen/blob/master/autoload/pathogen.vim
+      url: https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
       dest: "~/.vim/autoload/pathogen.vim"
       mode: 0644
 
@@ -55,6 +55,6 @@
   - name: installing vim plugins
     git:
       repo: "{{ item }}"
-      dest: '~/test_vim_installer/{{ item | basename | replace(".git", "")}}'
+      dest: '~/.vim/bundle/{{ item | basename | replace(".git", "")}}'
     with_items:
       - "{{ vim_plugin_repos }}"
