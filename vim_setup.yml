@@ -14,7 +14,8 @@
                        'https://github.com/scrooloose/nerdtree.git',
                        'https://github.com/myusuf3/numbers.vim.git',
                        'https://github.com/vim-airline/vim-airline.git',
-                       'https://github.com/vim-syntastic/syntastic.git']
+                       'https://github.com/vim-syntastic/syntastic.git',
+                       'https://github.com/morhetz/gruvbox.git']
 
   pre_tasks:
 
@@ -23,6 +24,7 @@
       url: https://raw.githubusercontent.com/dimitrios-work/vi/master/.vimrc
       dest: "~/.vimrc"
       mode: 0644
+      force: yes
 
   - name: creating the necessary vim directory structure for the user
     file:
@@ -34,11 +36,19 @@
       - '.vim/autoload'
       - '.vim/bundle'
 
+  - name: downloading yaml.vim
+    get_url:
+      dest: "~/.vim/yaml.vim"
+      url: https://raw.githubusercontent.com/dimitrios-work/vi/master/.vim/yaml.vim
+      mode: 0644
+      force: yes
+
   - name: downloading pathogen
     get_url:
       url: https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
       dest: "~/.vim/autoload/pathogen.vim"
       mode: 0644
+      force: yes
 
   - name: updating apt cache
     apt:
