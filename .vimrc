@@ -125,13 +125,17 @@ hi CursorLine term=none cterm=none ctermbg=3      " adjust color
 
 " Favorite Color Scheme
 if has("gui_running")
-   colorscheme evening
+   colorscheme gruvbox
+   set background=dark
+   "colorscheme evening
    " Remove Toolbar
    set guioptions-=T
    "Terminus is AWESOME
    set guifont=DejaVu\ Sans\ Mono\ 12
 else
-   colorscheme evening
+   colorscheme gruvbox
+   set background=dark
+   "colorscheme evening
 endif
 
 "Status line gnarliness
