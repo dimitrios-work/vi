@@ -319,16 +319,17 @@ let Tlist_Inc_Winwidth = 0
 "}}}
 
 "{{{ Plugins
+" decided to give ale a try, commenting out for now..
 " Syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_python_checkers = ['python', 'pylint', 'pyflakes']
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_aggregate_errors = 1
+" let g:syntastic_python_checkers = ['python', 'pylint', 'pyflakes']
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 "
 "NERDtree
 autocmd StdinReadPre * let s:std_in=1
